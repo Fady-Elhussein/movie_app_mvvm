@@ -2,15 +2,17 @@
 // a particular operation that your application needs to perform.
 // It acts as a bridge between the presentation
 // layer and the data layer.
+import 'package:dartz/dartz.dart';
 import 'package:movie_app_mvvm/movies/domain/repositories/base_movies_repository.dart';
 
+import '../../../core/error/failure.dart';
 import '../entities/movies_entity.dart';
 
 class GetPopularMoviesUseCase {
   final BaseMoviesRepository baseMoviesRepository;
 
   GetPopularMoviesUseCase({required this.baseMoviesRepository});
- Future<List<MoviesEntity>> execute() async {
+  Future<Either<Failure, List<MoviesEntity>>> execute() async {
     return await baseMoviesRepository.getPopularMovies();
   }
 }
