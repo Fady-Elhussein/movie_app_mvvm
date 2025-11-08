@@ -12,11 +12,19 @@ abstract class BaseMoviesRemoteDataSource {
 }
 
 class MoviesRemoteDataSource extends BaseMoviesRemoteDataSource {
-  Dio dio = Dio();
+  Dio dio = Dio(
+    BaseOptions(
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDE3YWMzYTQxOTBiZDNhMDhjNDUyZThmMzQwNjkyMyIsIm5iZiI6MTczNzIxMzc2Ny4wODE5OTk4LCJzdWIiOiI2NzhiYzc0NzhiY2E2NjFkMDU0MzBmMGYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.LE-OvQ292OnPX9FrPLC3BhlrYzSib8_hqdmqIwykHpc',
+      },
+    ),
+  );
+
   @override
   Future<List<MoviesModel>> getNowPlayingMovies() async {
     try {
-      Response response = await dio.get(AppConstants.nowPlayingMoviesPath);
+      Response response = await dio.get(ApiConstance.nowPlayingMoviesPath);
       if (response.statusCode == 200) {
         return List<MoviesModel>.from(
           (response.data["results"] as List).map(
@@ -34,7 +42,7 @@ class MoviesRemoteDataSource extends BaseMoviesRemoteDataSource {
   @override
   Future<List<MoviesModel>> getTopRatedMovies() async {
     try {
-      Response response = await dio.get(AppConstants.topRatedMoviesPath);
+      Response response = await dio.get(ApiConstance.topRatedMoviesPath);
       if (response.statusCode == 200) {
         return List<MoviesModel>.from(
           (response.data["results"] as List).map(
@@ -54,7 +62,7 @@ class MoviesRemoteDataSource extends BaseMoviesRemoteDataSource {
   @override
   Future<List<MoviesModel>> getPopularMovies() async {
     try {
-      Response response = await dio.get(AppConstants.popularMoviesPath);
+      Response response = await dio.get(ApiConstance.popularMoviesPath);
       if (response.statusCode == 200) {
         return List<MoviesModel>.from(
           (response.data["results"] as List).map(
