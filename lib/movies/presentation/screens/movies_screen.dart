@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,16 +9,13 @@ import 'package:movie_app_mvvm/movies/presentation/controllers/bloc/movies_event
 import 'package:movie_app_mvvm/movies/presentation/controllers/bloc/movies_state.dart';
 import '../../../core/services/services_locator.dart';
 
-
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          MoviesBloc(getNowPlayingMoviesUseCase: sl())
-            ..add(GetNowPlayingMovies()),
+      create: (context) => sl<MoviesBloc>()..add(GetNowPlayingMoviesEvent()),
       child: BlocBuilder<MoviesBloc, MoviesState>(
         builder: (context, state) {
           return Scaffold(

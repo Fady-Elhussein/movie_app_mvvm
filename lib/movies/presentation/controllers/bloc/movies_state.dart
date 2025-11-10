@@ -4,17 +4,39 @@ import 'package:movie_app_mvvm/movies/domain/entities/movies_entity.dart';
 
 class MoviesState extends Equatable {
   final List<MoviesEntity> nowPlayingMovies;
+  final List<MoviesEntity> popularMovies;
+  final List<MoviesEntity> topRatedMovies;
   final RequestStates nowPlayingMoviesState;
-  final String message;
+  final String nowPlayingMoviesMessage;
+  final RequestStates popularMoviesState;
+  final String popularMoviesMessage;
+  final RequestStates topRatedMoviesState;
+  final String topRatedMoviesMessage;
 
   const MoviesState({
     this.nowPlayingMovies = const [],
+    this.popularMovies = const [],
+    this.topRatedMovies = const [],
+    this.topRatedMoviesMessage = "",
+    this.nowPlayingMoviesMessage = "",
+    this.popularMoviesMessage = "",
+    this.popularMoviesState = RequestStates.loading,
+    this.topRatedMoviesState = RequestStates.loading,
     this.nowPlayingMoviesState = RequestStates.loading,
-    this.message = "",
   });
 
   @override
-  List<Object> get props => [message, nowPlayingMoviesState, nowPlayingMovies];
+  List<Object> get props => [
+    nowPlayingMoviesMessage,
+    nowPlayingMoviesState,
+    nowPlayingMovies,
+    popularMoviesMessage,
+    popularMoviesState,
+    popularMovies,
+    topRatedMoviesMessage,
+    topRatedMoviesState,
+    topRatedMovies,
+  ];
 }
 
 // final class MoviesInitial extends MoviesState {}
